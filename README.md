@@ -1,5 +1,11 @@
 # Loops Explaining Loops
 
+Two runs of the same experiment. This is **v1**. **[v2](./v2/README.md)** anchors
+the Design score to real reference images and a mechanical checklist instead of a
+subjective impression, runs the Critic as a fully isolated subagent, and adds real
+browser rendering every round — see [v2's README](./v2/README.md) for what that
+changed and what it found.
+
 A class assignment wrapped in an experiment: build a 10-minute lecture page on **agentic loops**
 (what they are, when to use them, their pros and cons) for an undergraduate class — by running an
 agentic loop to build it, with no human in the loop between rounds, and a subjective stop condition
