@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loops Explaining Loops</title>
+<style>
+  :root {
+    --bg: #faf8f4;
+    --ink: #1c1a17;
+    --muted: #5b564c;
+    --accent: #1f6f5c;
+    --accent-warm: #c9622a;
+    --card: #ffffff;
+    --border: #e4ddd1;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 100;
+    transition: width 0.1s linear;
+  }
+  nav {
+    position: sticky;
+    top: 4px;
+    background: rgba(250,248,244,0.96);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 24px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    z-index: 99;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navlinks { display: flex; gap: 18px; flex-wrap: wrap; }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  nav a.active { color: var(--accent); font-weight: bold; background: #eaf3f0; }
+  #readout {
+    color: var(--muted);
+    white-space: nowrap;
+    font-size: 0.78rem;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+  }
+  header.hero {
+    text-align: center;
+    padding: 40px 0 20px;
+  }
+  header.hero h1 {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+  }
+  header.hero p.sub {
+    font-family: Arial, sans-serif;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  section {
+    margin: 56px 0;
+  }
+  h2 {
+    font-size: 1.5rem;
+    border-bottom: 3px solid var(--accent);
+    display: inline-block;
+    padding-bottom: 4px;
+  }
+  h3 { font-size: 1.1rem; color: var(--accent); }
+  p { margin: 14px 0; }
+  .term { font-weight: bold; color: var(--accent); }
+  .callout {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-warm);
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 0.92rem;
+    margin: 20px 0;
+  }
+  .callout strong { color: var(--accent-warm); }
+  .checklist {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 22px;
+    font-family: Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  .checklist li { margin-bottom: 8px; }
+  .diagram-wrap {
+    overflow-x: auto;
+    margin: 24px 0;
+    padding-bottom: 6px;
+  }
+  .diagram {
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    flex-wrap: nowrap;
+    min-width: 520px;
+    gap: 10px;
+  }
+  .step {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: center;
+    min-width: 100px;
+    flex: 1;
+  }
+  .arrow { font-size: 1.4rem; color: var(--accent-warm); flex: 0 0 auto; }
+  .cols {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .col {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .col.pros { border-top: 4px solid var(--accent); }
+  .col.cons { border-top: 4px solid var(--accent-warm); }
+  .col ul { padding-left: 18px; margin: 8px 0; font-family: Arial, sans-serif; font-size: 0.92rem;}
+  .col li { margin-bottom: 10px; }
+  @media (max-width: 600px) {
+    .cols { flex-direction: column; }
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    padding: 20px;
+  }
+  code {
+    background: #eee8dc;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav id="navbar">
+  <div class="navlinks">
+    <a href="#intro">Intro</a>
+    <a href="#what">What</a>
+    <a href="#when">When</a>
+    <a href="#proscons">Pros/Cons</a>
+    <a href="#example">This Page</a>
+    <a href="#recap">Recap</a>
+  </div>
+  <span id="readout">Section 1 of 6 &middot; ~10 min left</span>
+</nav>
+<main>
+  <header class="hero" id="intro">
+    <h1>Loops Explaining Loops</h1>
+    <p class="sub">A 10-minute page about agentic loops — written, in part, by one.</p>
+  </header>
+
+  <section id="what">
+    <h2>What is an agentic loop?</h2>
+    <p>
+      Normally, when you use an AI chatbot, it's one question, one answer. You ask, it replies,
+      done. An <span class="term">agentic loop</span> is different: instead of answering once, the
+      AI repeats a cycle of <em>reasoning</em> and <em>acting</em> — over and over — until some goal
+      is met or it runs out of budget.
+    </p>
+    <p>
+      The cycle usually looks like this: the AI thinks about what to do next, takes an action (like
+      running code, searching the web, or editing a file), looks at the result, and decides whether
+      it's done or needs another pass. This pattern has a name in AI research —
+      <span class="term">ReAct</span> (short for "Reason + Act") — introduced in a widely-cited 2022
+      research paper, and it's the basic skeleton underneath most AI agents built since.
+    </p>
+    <div class="diagram-wrap">
+      <div class="diagram">
+        <div class="step">Reason<br><small>"what should I do?"</small></div>
+        <div class="arrow">&#8594;</div>
+        <div class="step">Act<br><small>run code, search, edit</small></div>
+        <div class="arrow">&#8594;</div>
+        <div class="step">Observe<br><small>check the result</small></div>
+        <div class="arrow">&#8594;</div>
+        <div class="step">Repeat or Stop</div>
+      </div>
+    </div>
+    <p>
+      The loop needs a <span class="term">stopping condition</span> — a rule for when to quit.
+      Common ones: the goal is achieved (tests pass, the task is done), a maximum number of steps is
+      hit, or a human interrupts it. Without a stopping condition, a loop can run forever, which is
+      exactly the kind of thing that goes wrong in practice (more on that later).
+    </p>
+  </section>
+
+  <section id="when">
+    <h2>When should you use one?</h2>
+    <p>
+      Not every task needs a loop. If a task is one step — summarize this paragraph, translate this
+      sentence — a single AI call is faster, cheaper, and just as good. Loops earn their cost when a
+      task is <em>multi-step</em> and the right next step depends on what happened in the previous
+      one.
+    </p>
+    <p>
+      A good rule of thumb: use an agentic loop when the task has a way to check its own progress —
+      a test suite that passes or fails, a compiler that errors or doesn't, a checklist that's either
+      complete or not. That gives the loop something concrete to react to at each step. Tasks with no
+      clear "am I done yet?" signal are much harder to hand to a loop, because it has no way to know
+      when to stop trying — which is a large part of why this very experiment (see below) had to
+      define an explicit scoring rule up front, instead of just letting the AI decide when the page
+      "felt" finished.
+    </p>
+    <p>
+      Here's a worked comparison. Say you want an AI to fix a bug in a small program.
+    </p>
+    <ul class="checklist">
+      <li><strong>Single call:</strong> you paste the code and the error message, the AI guesses a
+        fix in one shot, and you paste it back in yourself to see if it worked. If it didn't, you're
+        back at the start, manually.</li>
+      <li><strong>Agentic loop:</strong> the AI edits the file itself, runs the program, reads the
+        new error (if any), and tries again — automatically, without you in the middle — until the
+        program runs clean or it hits a step limit.</li>
+    </ul>
+    <p>
+      The second version costs more calls and more time. It's worth it here because "did the program
+      run without errors?" is a check the loop can perform on its own, over and over, without asking
+      you. A quick way to decide which situation you're in:
+    </p>
+    <ul class="checklist">
+      <li>Does the task need more than one step to finish? If no, skip the loop.</li>
+      <li>Can something (a test, a compiler, a checklist) tell you objectively whether a given
+        attempt succeeded? If no, a loop won't know when to stop either.</li>
+      <li>Can you tolerate the extra time and cost of several AI calls instead of one? If not, a
+        loop isn't worth it even if the first two answers are yes.</li>
+    </ul>
+  </section>
+
+  <section id="proscons">
+    <h2>Pros and cons</h2>
+    <div class="cols">
+      <div class="col pros">
+        <h3>Pros</h3>
+        <ul>
+          <li><strong>Handles multi-step work.</strong> A loop can plan, act, check, and correct
+            itself across many steps without a human re-prompting it each time.</li>
+          <li><strong>Self-correction.</strong> If step 3 reveals that step 1 was wrong, the loop can
+            notice and fix it on step 4, instead of a human catching it later.</li>
+          <li><strong>Takes real actions.</strong> It can call tools that actually change something —
+            run code, query a database, send a file — not just produce text.</li>
+        </ul>
+      </div>
+      <div class="col cons">
+        <h3>Cons</h3>
+        <ul>
+          <li><strong>Slower and more expensive.</strong> A single AI reply might take a second. A
+            loop chains many replies together, so a task can take minutes and cost far more.</li>
+          <li><strong>Can spiral.</strong> Researchers have documented "hallucination spirals," where
+            a coding agent's small early mistake compounds over several loop iterations into a much
+            bigger, self-reinforcing failure.</li>
+          <li><strong>Hard to grade its own work.</strong> If the AI itself is also checking whether
+            it's done, it can be too easy on itself — a documented pattern researchers call
+            self-attribution bias. That's a real risk for exactly this kind of project.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Diminishing (or negative) returns:</strong> studies of AI agents re-checking and
+      re-fixing their own work have found that most of the improvement shows up after the first
+      extra pass — later passes help less, and for some models an extra round can actually make
+      things worse, by widening what gets changed and introducing new problems along the way. More
+      loop iterations is not automatically better.
+    </div>
+  </section>
+
+  <section id="example">
+    <h2>The example is this page</h2>
+    <p>
+      This lecture page is itself the output of an agentic loop. An AI played two roles across
+      several rounds: a <span class="term">Builder</span>, who wrote or revised the page, and a
+      <span class="term">Critic</span>, who scored the current draft and pointed out specific
+      problems. Each round, the Builder responded to the Critic's actual feedback, and the loop kept
+      going until the draft hit a strict score on both content and design, or a fixed round limit was
+      reached — whichever came first.
+    </p>
+    <p>
+      That's the "am I done yet?" signal from the previous section, made concrete: a numeric rubric
+      instead of a vague feeling of "looks good." If you want to see the whole process — every draft,
+      every critique, and how the scores actually moved round to round — that's in the companion file
+      that came with this page.
+    </p>
+  </section>
+
+  <section id="recap">
+    <h2>Recap</h2>
+    <p>
+      An agentic loop is a repeating reason-act-observe cycle an AI runs until a stopping condition
+      is met. Use one when a task is multi-step and has a checkable definition of "done." The upside
+      is autonomy and self-correction across many steps; the downside is cost, latency, and the risk
+      of the loop spiraling or grading its own homework too kindly.
+    </p>
+  </section>
+
+  <footer>Loops Explaining Loops — Round 2</footer>
+</main>
+<script>
+  const sections = document.querySelectorAll('section, header.hero');
+  const navLinks = document.querySelectorAll('nav a');
+  const progressBar = document.getElementById('progress');
+  const readout = document.getElementById('readout');
+  const sectionIds = Array.from(sections).map(s => s.id);
+
+  const WORDS_PER_MIN = 180;
+  const totalWords = document.querySelector('main').innerText.trim().split(/\s+/).length;
+  const totalMinutes = totalWords / WORDS_PER_MIN;
+
+  function update() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const fraction = docHeight > 0 ? scrollTop / docHeight : 0;
+    progressBar.style.width = (fraction * 100) + '%';
+
+    let current = sectionIds[0];
+    let currentIndex = 0;
+    sections.forEach((sec, i) => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 120) { current = sec.id; currentIndex = i; }
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+
+    const minutesLeft = Math.max(0, Math.round(totalMinutes * (1 - fraction)));
+    readout.textContent = 'Section ' + (currentIndex + 1) + ' of ' + sectionIds.length +
+      ' · ~' + minutesLeft + ' min left';
+  }
+
+  window.addEventListener('scroll', update);
+  update();
+</script>
+</body>
+</html>
