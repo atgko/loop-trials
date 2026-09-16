@@ -96,17 +96,4 @@
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawChart);
   }
-
-  var loadBtn = document.getElementById("load-compare");
-  var frames = document.getElementById("compare-frames");
-  if (loadBtn && frames) {
-    loadBtn.addEventListener("click", function () {
-      var iframes = frames.querySelectorAll("iframe");
-      iframes[0].src = "artifacts/v1-final.html";
-      iframes[1].src = "artifacts/v2-showcase.html";
-      frames.hidden = false;
-      loadBtn.hidden = true;
-      frames.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
 })();

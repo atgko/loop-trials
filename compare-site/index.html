@@ -27,7 +27,30 @@
   </div>
 </header>
 
-<main class="wrap">
+<main>
+
+  <section class="showcase-compare">
+    <div class="wrap-wide">
+      <div class="showcase-heading">
+        <h2>The final result, side by side</h2>
+        <p class="section-note">Each run's best round, standalone &mdash; no tab chrome, just the finished page.</p>
+      </div>
+      <div class="compare-frames">
+        <div class="frame-col v1">
+          <p class="frame-label"><span class="pill pill-v1">v1</span> Final round &mdash; round 4 of 4</p>
+          <iframe title="v1 finished lecture page" src="artifacts/v1-showcase.html" loading="eager"></iframe>
+          <a class="frame-open" href="artifacts/v1-showcase.html" target="_blank" rel="noopener">Open full page &#8599;</a>
+        </div>
+        <div class="frame-col v2">
+          <p class="frame-label"><span class="pill pill-v2">v2</span> Final round &mdash; round 8 of 8</p>
+          <iframe title="v2 finished lecture page" src="artifacts/v2-showcase.html" loading="eager"></iframe>
+          <a class="frame-open" href="artifacts/v2-showcase.html" target="_blank" rel="noopener">Open full page &#8599;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
 
   <section class="stat-row" aria-label="Run summary">
     <div class="stat-card v1">
@@ -138,31 +161,24 @@
     </p>
   </section>
 
-  <section class="panel compare-section">
-    <h2>See it yourself</h2>
-    <p class="section-note">Every artifact below is fully self-contained &mdash; no build step, no network calls.</p>
-
-    <div class="artifact-links">
-      <a class="btn btn-primary" href="artifacts/v1-final.html" target="_blank" rel="noopener">Open v1 &mdash; round-by-round</a>
-      <a class="btn btn-primary" href="artifacts/v2-showcase.html" target="_blank" rel="noopener">Open v2 &mdash; finished showcase</a>
-      <a class="btn btn-secondary" href="artifacts/v2-final.html" target="_blank" rel="noopener">Open v2 &mdash; round-by-round</a>
-    </div>
-
-    <div class="compare-toggle">
-      <button id="load-compare" class="btn btn-ghost">Load side-by-side preview &darr;</button>
-    </div>
-
-    <div id="compare-frames" class="compare-frames" hidden>
-      <div class="frame-col">
-        <p class="frame-label">v1 &mdash; final.html (round 4, best result)</p>
-        <iframe title="v1 final result" loading="lazy"></iframe>
-      </div>
-      <div class="frame-col">
-        <p class="frame-label">v2 &mdash; showcase.html (round 8, best result)</p>
-        <iframe title="v2 showcase result" loading="lazy"></iframe>
-      </div>
+  <section class="panel explore-section">
+    <h2>Explore the full process</h2>
+    <p class="section-note">Every round, tabbed, with each round's score strip and critic verdict &mdash; how each run actually got to the pages above.</p>
+    <div class="explore-links">
+      <a class="explore-card v1" href="artifacts/v1-final.html" target="_blank" rel="noopener">
+        <span class="pill pill-v1">v1</span>
+        <span class="explore-title">Round-by-round &#8599;</span>
+        <span class="explore-desc">All 4 rounds, plus a Highlights tab.</span>
+      </a>
+      <a class="explore-card v2" href="artifacts/v2-final.html" target="_blank" rel="noopener">
+        <span class="pill pill-v2">v2</span>
+        <span class="explore-title">Round-by-round &#8599;</span>
+        <span class="explore-desc">All 8 rounds, each in a sandboxed iframe with its score strip.</span>
+      </a>
     </div>
   </section>
+
+  </div>
 
 </main>
 
