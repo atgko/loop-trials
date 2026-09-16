@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loops Explaining Loops — v1 vs v2</title>
+<meta name="description" content="Side-by-side comparison of two agentic-loop experiment runs: a subjectively-graded v1 and a mechanically-graded, isolated-critic v2." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <p class="eyebrow">Agentic loop experiment &mdash; comparison</p>
+    <h1>Loops Explaining Loops<br><span class="accent">v1 vs v2</span></h1>
+    <p class="lede">
+      Two runs of the same experiment: have an AI loop build and grade its own
+      10-minute lecture page on agentic loops, with no human in the loop between
+      rounds. v1 used a subjective 0&ndash;10 design score graded by the same session
+      that wrote the draft. v2 changed the mechanism &mdash; a mechanical scoring
+      formula, an isolated cold critic, and real browser rendering compared against
+      reference images &mdash; to see whether that closes the gap v1 exposed.
+    </p>
+    <div class="header-links">
+      <a class="btn btn-ghost" href="https://github.com/atgko/loop-trials" target="_blank" rel="noopener">View source on GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="stat-row" aria-label="Run summary">
+    <div class="stat-card v1">
+      <p class="stat-label">v1</p>
+      <p class="stat-big">4 <span>/ 8 rounds</span></p>
+      <p class="stat-sub">Stopped on a genuine 10/10, both axes, round 4</p>
+      <p class="stat-score">Content 10/10 &middot; Design 10/10</p>
+    </div>
+    <div class="stat-card v2">
+      <p class="stat-label">v2</p>
+      <p class="stat-big">8 <span>/ 8 rounds</span></p>
+      <p class="stat-sub">Hit the round cap &mdash; never a simultaneous 10/10</p>
+      <p class="stat-score">Content 10/10 &middot; Design 9/10 (best, round 8)</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Score history</h2>
+    <p class="section-note">Both axes scored out of 10 each round. v1 stopped early on a genuine double-10; v2 ran the full cap and plateaued at Design 9/10.</p>
+    <div id="chart" class="chart" role="img" aria-label="Line chart of Content and Design scores per round for v1 and v2"></div>
+    <div class="legend">
+      <span><i class="swatch v1-content"></i>v1 Content</span>
+      <span><i class="swatch v1-design"></i>v1 Design</span>
+      <span><i class="swatch v2-content"></i>v2 Content</span>
+      <span><i class="swatch v2-design"></i>v2 Design</span>
+    </div>
+
+    <div class="tables">
+      <div class="table-wrap">
+        <h3>v1 &mdash; 4 rounds</h3>
+        <table>
+          <thead><tr><th>Round</th><th>Content</th><th>Design</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>8</td><td>7</td></tr>
+            <tr><td>2</td><td>9</td><td>8</td></tr>
+            <tr><td>3</td><td>10</td><td>9</td></tr>
+            <tr><td>4</td><td>10</td><td>10</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <h3>v2 &mdash; 8 rounds</h3>
+        <table>
+          <thead><tr><th>Round</th><th>Content</th><th>Design</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>9</td><td>8</td></tr>
+            <tr><td>2</td><td>10</td><td>9</td></tr>
+            <tr><td>3</td><td>10</td><td>9</td></tr>
+            <tr><td>4</td><td>10</td><td>9</td></tr>
+            <tr><td>5</td><td>9</td><td>9</td></tr>
+            <tr><td>6</td><td>10</td><td>9</td></tr>
+            <tr><td>7</td><td>10</td><td>9</td></tr>
+            <tr><td>8</td><td>10</td><td>9</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>What changed between runs</h2>
+    <ul class="change-list">
+      <li><strong>Mechanical design score.</strong> v2 derives the Design score from a fixed checklist and formula in <code>design-system.md</code>, not a subjective 0&ndash;10 impression.</li>
+      <li><strong>Isolated critic.</strong> v2's critic runs as a separate subagent that never sees the builder's reasoning, prior scores, or the round number &mdash; it grades every round cold.</li>
+      <li><strong>Real rendering.</strong> v2's critic has live browser access: it screenshots the actual rendered page and compares it against five reference images extracted from a real slide deck, not just the written rules.</li>
+      <li><strong>Two deliverables.</strong> v2 produces both a clean standalone page meant to be shared (<code>showcase.html</code>) and the full round-by-round process view, instead of just the latter.</li>
+    </ul>
+  </section>
+
+  <section class="panel findings">
+    <h2>The part worth reading, from each run</h2>
+    <div class="finding-grid">
+      <div class="finding v1">
+        <p class="finding-tag">v1 finding</p>
+        <p>
+          Every 9 or 10 in every round pointed at something real &mdash; a quoted line,
+          a word count, a measured contrast ratio. Nothing was rubber-stamped. And yet,
+          flip from the round&nbsp;1 tab to the round&nbsp;4 tab in <code>final.html</code> and
+          the layout, type, color palette, and overall feel are almost identical. What
+          changed round to round was accuracy, completeness, and one contrast fix &mdash;
+          not the actual visual design. A rigorous, evidence-backed loop grading itself
+          can converge on <em>&ldquo;passes every check I wrote for it&rdquo;</em> without ever
+          being asked the fuzzier question that actually mattered. The rubric never asked.
+        </p>
+      </div>
+      <div class="finding v2">
+        <p class="finding-tag">v2 finding</p>
+        <p>
+          Design scored 9/10 for seven rounds straight &mdash; not the same bug recurring,
+          but seven genuinely different, real defects, each caught by the rendered check
+          and each backed by concrete evidence. Read rounds 2, 6, and 8 together, though,
+          and one thread runs through all three: the reference images fill every icon
+          badge solid crimson, while the design system's own dominance rule caps how much
+          of the page can be crimson-filled. Those two constraints are in real tension.
+          Because each critic call is deliberately isolated and cold, no single round was
+          positioned to name that conflict &mdash; it only shows up when you read all eight
+          reports side by side. The loop hit its cap before anyone named it explicitly.
+        </p>
+      </div>
+    </div>
+    <p class="meta-finding">
+      Put side by side, the two runs show two different failure modes of the same pattern:
+      v1's subjective, self-graded rubric converged to a perfect score without the thing
+      it was meant to measure ever changing. v2's objective, cold-isolated rubric caught
+      real bugs every single round &mdash; and still plateaued, because isolation that
+      prevents rubber-stamping also prevents any round from noticing a pattern that only
+      exists across rounds.
+    </p>
+  </section>
+
+  <section class="panel compare-section">
+    <h2>See it yourself</h2>
+    <p class="section-note">Every artifact below is fully self-contained &mdash; no build step, no network calls.</p>
+
+    <div class="artifact-links">
+      <a class="btn btn-primary" href="artifacts/v1-final.html" target="_blank" rel="noopener">Open v1 &mdash; round-by-round</a>
+      <a class="btn btn-primary" href="artifacts/v2-showcase.html" target="_blank" rel="noopener">Open v2 &mdash; finished showcase</a>
+      <a class="btn btn-secondary" href="artifacts/v2-final.html" target="_blank" rel="noopener">Open v2 &mdash; round-by-round</a>
+    </div>
+
+    <div class="compare-toggle">
+      <button id="load-compare" class="btn btn-ghost">Load side-by-side preview &darr;</button>
+    </div>
+
+    <div id="compare-frames" class="compare-frames" hidden>
+      <div class="frame-col">
+        <p class="frame-label">v1 &mdash; final.html (round 4, best result)</p>
+        <iframe title="v1 final result" loading="lazy"></iframe>
+      </div>
+      <div class="frame-col">
+        <p class="frame-label">v2 &mdash; showcase.html (round 8, best result)</p>
+        <iframe title="v2 showcase result" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built from the <a href="https://github.com/atgko/loop-trials" target="_blank" rel="noopener">loop-trials</a> repository. Both experiments were run end-to-end by Claude Code with no human edits between rounds.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
