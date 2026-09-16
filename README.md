@@ -1,10 +1,37 @@
 # Loops Explaining Loops
 
-Two runs of the same experiment. This is **v1**. **[v2](./v2/README.md)** anchors
-the Design score to real reference images and a mechanical checklist instead of a
-subjective impression, runs the Critic as a fully isolated subagent, and adds real
-browser rendering every round — see [v2's README](./v2/README.md) for what that
-changed and what it found.
+An agentic loop graded its own work and gave itself a false 10/10. A second run with
+mechanical checks and an isolated critic still plateaued at 9/10 — here's why.
+
+**[Compare both runs side by side →](https://compare-loop-trials.vercel.app)**
+
+Two runs of the same experiment. This is **v1**: a subjective 0–10 Design score,
+graded by the same session that just wrote the draft, converged to a perfect 10/10
+in round 4 — without the actual visual design ever meaningfully changing. Every
+score was backed by real evidence (quoted CSS, measured contrast ratios), so nothing
+was rubber-stamped; the rubric itself just never asked the question that mattered.
+
+**[v2](./v2/README.md)** was built to close that gap: the Design score is now
+mechanical (a fixed checklist and formula, not an impression), the Critic runs as a
+fully isolated subagent that never sees the Builder's reasoning or prior scores, and
+every round gets real browser rendering compared against five reference images from
+an actual slide deck. The result: v2 ran the full 8-round cap and **never** hit a
+simultaneous 10/10 — it plateaued at Content 10/10, Design 9/10 for seven straight
+rounds. Reading all eight critic reports together (something no single round's
+isolated critic could do) surfaces why: the reference images fill every icon badge
+solid crimson, while the design system's own crimson-dominance rule caps how much of
+the page can be crimson-filled. Every round fixed a genuinely new, real defect —
+gray connector arrows, dense card layouts, faint watermarks, monochrome badges — but
+each fix was actually a fresh symptom of that one unresolved rule conflict, and
+no round was positioned to name it. See [v2's README](./v2/README.md) and
+[v2's run-summary.md](./v2/run-summary.md) for the full round-by-round breakdown.
+
+| Run | Rounds | Content | Design | Stop reason |
+|-----|--------|---------|--------|-------------|
+| v1  | 4 / 8  | 10/10   | 10/10  | `perfect_score` |
+| v2  | 8 / 8  | 10/10   | 9/10 (best) | `round_cap` |
+
+---
 
 A class assignment wrapped in an experiment: build a 10-minute lecture page on **agentic loops**
 (what they are, when to use them, their pros and cons) for an undergraduate class — by running an
